@@ -92,5 +92,4 @@ def login():
     token = Auth.generate_token(ser_data[0].get('id'))
     return custom_response({'jwt_token': token}, 200)
 
-# TODO: Fully understand how Auth works
 # TODO: Fix bug, when trying to update User's Password
