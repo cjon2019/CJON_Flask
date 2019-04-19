@@ -17,7 +17,7 @@ def create_app(env_name):
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['CORS_HEADERS'] = 'application/json'
     app.register_blueprint(user_api, url_prefix='/api/v1/users')
-    app.register_blueprint(jobs_api, url_prefix='/api/vi/jobs')
+    app.register_blueprint(jobs_api, url_prefix='/api/v1/jobs')
     bcrypt.init_app(app)
     db.init_app(app)
     @app.route('/')
