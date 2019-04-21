@@ -21,7 +21,7 @@ class Development(object):
 export FLASK_ENV=development
 export JWT_SECRET_KEY=thisIsYourSecretKey
 # export DATABASE_URL=postgres://{username}:{password}@localhost/flask_blog
-export DATABASE_URL=postgres:qwer1234//postgres:@localhost/flask_blog
+export DATABASE_URL=postgres://postgres:qwer1234@localhost/flask_blog
 ```
 
 Default username is 'postgres'

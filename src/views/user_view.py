@@ -17,16 +17,16 @@ def custom_response(res, status_code):
 # @Auth.auth_required
 def get_all():
     users = UserModel.get_all_users()
-    ser_users, error = user_schema.dump(users, many=True)
+    ser_users = user_schema.dump(users, many=True)
     print(ser_users)
-    return custom_response(ser_users, 200)
+    return custom_response(ser_users[0], 200)
 
 # READ - Get one User
 @user_api.route('/<int:id>', methods=['GET'])
 def get_one(id):
     user = UserModel.get_by_id(id)
-    ser_data, error = user_schema.dump(user)
-    return custom_response(ser_data, 200)
+    ser_data = user_schema.dump(user)
+    return custom_response(ser_data[0], 200)
 
 # CREATE new user
 @user_api.route('/', methods=['POST'])
@@ -62,7 +62,7 @@ def update(id):
     user = UserModel.get_by_id(id)
     user.update(new_data)
     ser_user = user_schema.dump(user)
-    return custom_response(ser_user, 200)
+    return custom_response(ser_user[0], 200)
 
 # DELETE user by Id
 @user_api.route('/<int:id>', methods =['DELETE'])
@@ -92,5 +92,4 @@ def login():
     token = Auth.generate_token(ser_data[0].get('id'))
     return custom_response({'jwt_token': token}, 200)
 
-# TODO: Fully understand how Auth works
 # TODO: Fix bug, when trying to update User's Password
