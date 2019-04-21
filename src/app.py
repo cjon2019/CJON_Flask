@@ -6,6 +6,8 @@ from .models import user
 from .views.user_view import user_api
 from .views.job_view import jobs_api
 import os
+
+
 def create_app(env_name):
     '''
     Create Application

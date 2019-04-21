@@ -27,7 +27,7 @@ def print_all_json_data():
         if state in data['SearchResult']['SearchResultItems'][i]['MatchedObjectDescriptor']['PositionLocation'][0]['LocationName']:
             # POSITION TITLE
             print(
-                f"Position Title : {data['SearchResult']['SearchResultItems'][i]['MaflatchedObjectDescriptor']['PositionTitle']}")
+                f"Position Title : {data['SearchResult']['SearchResultItems'][i]['MatchedObjectDescriptor']['PositionTitle']}")
             # LOCATIONS
             print(
                 f"Location : {data['SearchResult']['SearchResultItems'][i]['MatchedObjectDescriptor']['PositionLocation'][0]['LocationName']}")
