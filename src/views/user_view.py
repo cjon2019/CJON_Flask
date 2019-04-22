@@ -90,6 +90,11 @@ def login():
         return custom_response({'error': 'invalid credentials'})
     ser_data = user_schema.dump(user)
     token = Auth.generate_token(ser_data[0].get('id'))
-    return custom_response({'jwt_token': token}, 200)
+
+    context = {}
+
+    return custom_response({
+        'jwt_token': token,
+        'user': user}, 200)
 
 # TODO: Fix bug, when trying to update User's Password
