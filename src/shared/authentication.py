@@ -7,6 +7,7 @@ from functools import wraps
 from flask import json, Response, request, g
 from ..models.user import UserModel
 
+
 class Auth:
     @staticmethod
     def auth_required(f):
@@ -44,7 +45,6 @@ class Auth:
             g.user = {'id': user_id}
             return f(*args, **kwargs)
         return auth_wrapper
-
 
     @staticmethod
     def decode_token(token):

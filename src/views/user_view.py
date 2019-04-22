@@ -1,14 +1,15 @@
 from flask import request, json, Response, Blueprint
 from .. models.user import UserModel, UserSchema
-from .. shared.authentication import Auth 
+from .. shared.authentication import Auth
 
 user_api = Blueprint('users', __name__)
 user_schema = UserSchema()
 
+
 def custom_response(res, status_code):
     return Response(
-        mimetype = "application/json",
-        response = json.dumps(res),
+        mimetype="application/json",
+        response=json.dumps(res),
         status=status_code
     )
 
@@ -53,7 +54,7 @@ def create():
     token = Auth.generate_token(ser_data[0].get('id'))
     return custom_response({'jwt_token': token}, 201)
 
-# UPDATE user 
+# UPDATE user
 # BUG: Trying to update password will give an exception.
 @user_api.route('/update/<int:id>', methods=['PUT'])
 def update(id):
@@ -65,7 +66,7 @@ def update(id):
     return custom_response(ser_user[0], 200)
 
 # DELETE user by Id
-@user_api.route('/<int:id>', methods =['DELETE'])
+@user_api.route('/<int:id>', methods=['DELETE'])
 @Auth.auth_required
 def delete(id):
     user = UserModel.get_by_id(id)
