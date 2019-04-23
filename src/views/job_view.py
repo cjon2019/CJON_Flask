@@ -113,7 +113,6 @@ def job_state_and_position_query(state = None, position = None):
     print(result_count)
 
     my_list = []
-    # Filtering only Jobs where their state is specific to their input state
     for i in range(result_count):
         if state in data['SearchResult']['SearchResultItems'][i]['MatchedObjectDescriptor']['PositionLocation'][0]['LocationName']:
             my_list.append(data['SearchResult']['SearchResultItems'][i])
@@ -127,7 +126,7 @@ def job_state_and_position_query(state = None, position = None):
             print(f"Position Title : {data['SearchResult']['SearchResultItems'][i]['MatchedObjectDescriptor']['PositionTitle']}")
     '''
     # Converts JSON back into a string, so that the browser can render it
-    json_formatted_string = json.dumps(my_list)
+    json_formatted_string = json.dumps(data)
     print(type(json_formatted_string))
     return json_formatted_string
 
