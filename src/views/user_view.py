@@ -66,7 +66,7 @@ def update(id):
 
 # DELETE user by Id
 @user_api.route('/<int:id>', methods =['DELETE'])
-@Auth.auth_required
+# @Auth.auth_required
 def delete(id):
     user = UserModel.get_by_id(id)
     user.delete()
