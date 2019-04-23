@@ -97,5 +97,3 @@ def login():
         'last_name': user.last_name,
         'email' : user.email,
         'id': user.id}, 200)
-
-# TODO: Fix bug, when trying to update User's Password
