@@ -55,7 +55,7 @@ def create():
 
 # UPDATE user 
 # BUG: Trying to update password will give an exception.
-@user_api.route('/update/<int:id>', methods=['PUT'])
+@user_api.route('/<int:id>', methods=['PUT'])
 def update(id):
     req_data = request.get_json()
     new_data = user_schema.load(req_data, partial=True)
