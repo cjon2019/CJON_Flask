@@ -17,7 +17,7 @@ def custom_response(res, status_code):
 def skills_get_all():
     skills = SkillsModel.get_all_skills()
     data = skills_schema.dump(skills, many=True)
-    return custom_response(data, 200)
+    return custom_response(data[0], 200)
 
 # READ - Get 1 skill
 @skills_api.route('/<int:id>', methods=['GET'])
@@ -26,7 +26,7 @@ def skills_get_by_id(id):
     if not post:
         return custom_response({'error': 'Skill not found'}, 404)
     data = skills_schema.dump(post)
-    return custom_response(data, 200)
+    return custom_response(data[0], 200)
 
 # CREATE - Post new skill to db
 @skills_api.route('/', methods=['POST'])
@@ -43,7 +43,7 @@ def skills_create():
 
     ser_data = skills_schema.dump(skills)
     print(f'ser_data = {ser_data}')
-    return custom_response(ser_data, 201)
+    return custom_response(ser_data[0], 201)
 
 # UPDATE - Update an existing skill
 @skills_api.route('/<int:id>', methods=['PUT'])
@@ -63,7 +63,7 @@ def skills_update(id):
 
     skill.update(data)
     data = skills_schema.dump(skill)
-    return custom_response(data, 200)
+    return custom_response(data[0], 200)
 
 
 # Delete - Delete skill from User
