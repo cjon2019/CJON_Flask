@@ -17,6 +17,8 @@ def custom_response(res, status_code):
 def skills_get_all():
     skills = SkillsModel.get_all_skills()
     data = skills_schema.dump(skills, many=True)
+    print(type(data[0]))
+    print(data[0])
     return custom_response(data[0], 200)
 
 # READ - Get 1 skill
