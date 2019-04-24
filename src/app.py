@@ -5,6 +5,7 @@ from .models import bcrypt, db
 from .models import user
 from .views.user_view import user_api
 from .views.job_view import jobs_api
+from .views.skills_view import skills_api
 import os
 def create_app(env_name):
     '''
@@ -18,6 +19,7 @@ def create_app(env_name):
     app.config['CORS_HEADERS'] = 'application/json'
     app.register_blueprint(user_api, url_prefix='/api/v1/users')
     app.register_blueprint(jobs_api, url_prefix='/api/v1/jobs')
+    app.register_blueprint(skills_api, url_prefix='/api/v1/skills')
     bcrypt.init_app(app)
     db.init_app(app)
     @app.route('/')
