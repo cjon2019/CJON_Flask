@@ -79,7 +79,7 @@ def login():
     Validates and returns a web token if the user credentials are verified
     '''
     req_data = request.get_json()
-    data = user_schema.load(req_data)
+    data, error = user_schema.load(req_data)
     if not req_data.get('email') or not req_data.get('password'):
         return custom_response({'error': 'Email and Password required to login'})
     user = UserModel.get_by_email(req_data.get('email'))
@@ -88,7 +88,7 @@ def login():
 
     if not user.check_hash(req_data.get('password')):
         return custom_response({'error': 'invalid credentials'})
-    ser_data = user_schema.dump(user)
+    ser_data, error = user_schema.dump(user)
     token = Auth.generate_token(ser_data.get('id'))
 
     return custom_response({
