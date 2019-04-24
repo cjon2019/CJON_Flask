@@ -35,7 +35,7 @@ def create():
     req_data = request.get_json()
 
     # Pass in the dictionary and load into a user schema
-    data = user_schema.load(req_data)
+    data, error = user_schema.load(req_data)
     print(data)
     # if error:
     #     return custom_response(error, 400)
