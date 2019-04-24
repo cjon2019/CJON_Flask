@@ -19,7 +19,9 @@ def skills_get_all():
     data = skills_schema.dump(skills, many=True)
     print(type(data[0]))
     print(data[0])
-    return custom_response(data[0], 200)
+    print(type(data))
+    print(data)
+    return custom_response(data, 200)
 
 # READ - Get 1 skill
 @skills_api.route('/<int:id>', methods=['GET'])
