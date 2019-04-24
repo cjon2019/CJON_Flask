@@ -19,9 +19,7 @@ def skills_get_all():
     ser_data = skills_schema.dump(skills, many=True)
     print(type(ser_data))
     print(ser_data)
-    print(type(ser_data[0]))
-    print(ser_data[0])
-    return custom_response(ser_data[0], 200)
+    return custom_response(ser_data, 200)
 
 # READ - Get 1 skill
 @skills_api.route('/<int:id>', methods=['GET'])
@@ -30,7 +28,7 @@ def skills_get_by_id(id):
     if not post:
         return custom_response({'error': 'Skill not found'}, 404)
     data = skills_schema.dump(post)
-    return custom_response(data[0], 200)
+    return custom_response(data, 200)
 
 # CREATE - Post new skill to db
 @skills_api.route('/', methods=['POST'])
@@ -47,7 +45,7 @@ def skills_create():
 
     ser_data = skills_schema.dump(skills)
     print(f'ser_data = {ser_data}')
-    return custom_response(ser_data[0], 201)
+    return custom_response(ser_data, 201)
 
 # UPDATE - Update an existing skill
 @skills_api.route('/<int:id>', methods=['PUT'])
@@ -67,7 +65,7 @@ def skills_update(id):
 
     skill.update(data)
     data = skills_schema.dump(skill)
-    return custom_response(data[0], 200)
+    return custom_response(data, 200)
 
 
 # Delete - Delete skill from User

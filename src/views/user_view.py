@@ -19,14 +19,14 @@ def get_all():
     users = UserModel.get_all_users()
     ser_users = user_schema.dump(users, many=True)
     print(ser_users)
-    return custom_response(ser_users[0], 200)
+    return custom_response(ser_users, 200)
 
 # READ - Get one User
 @user_api.route('/<int:id>', methods=['GET'])
 def get_one(id):
     user = UserModel.get_by_id(id)
     ser_data = user_schema.dump(user)
-    return custom_response(ser_data[0], 200)
+    return custom_response(ser_data, 200)
 
 # CREATE new user
 @user_api.route('/', methods=['POST'])
@@ -50,7 +50,7 @@ def create():
     user = UserModel(data)
     user.save()
     ser_data = user_schema.dump(user)
-    token = Auth.generate_token(ser_data[0].get('id'))
+    token = Auth.generate_token(ser_data.get('id'))
     return custom_response({'jwt_token': token}, 201)
 
 # UPDATE user 
@@ -62,7 +62,7 @@ def update(id):
     user = UserModel.get_by_id(id)
     user.update(req_data)
     ser_user = user_schema.dump(user)
-    return custom_response(ser_user[0], 200)
+    return custom_response(ser_user, 200)
 
 # DELETE user by Id
 @user_api.route('/<int:id>', methods =['DELETE'])
@@ -89,7 +89,7 @@ def login():
     if not user.check_hash(req_data.get('password')):
         return custom_response({'error': 'invalid credentials'})
     ser_data = user_schema.dump(user)
-    token = Auth.generate_token(ser_data[0].get('id'))
+    token = Auth.generate_token(ser_data.get('id'))
 
     return custom_response({
         'jwt_token': token,
