@@ -49,7 +49,7 @@ def create():
     # Pass in the user schema and get a User object (model) back
     user = UserModel(data)
     user.save()
-    ser_data = user_schema.dump(user)
+    ser_data, error = user_schema.dump(user)
     token = Auth.generate_token(ser_data.get('id'))
     return custom_response({'jwt_token': token}, 201)
 
