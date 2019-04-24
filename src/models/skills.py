@@ -1,7 +1,7 @@
-from . import db, bcrypt
-from datetime import datetime
-
+import datetime
 from marshmallow import fields, Schema
+from . import db
+from ..app import bcrypt
 
 # Schemas tell us how the Model is structured
 class SkillsSchema(Schema):
