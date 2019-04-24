@@ -54,13 +54,13 @@ def create():
     return custom_response({'jwt_token': token}, 201)
 
 # UPDATE user 
-# BUG: Trying to update password will give an exception.
 @user_api.route('/<int:id>', methods=['PUT'])
 def update(id):
     req_data = request.get_json()
-    new_data = user_schema.load(req_data, partial=True)
+    # new_data = user_schema.load(req_data, partial=True)
+
     user = UserModel.get_by_id(id)
-    user.update(new_data)
+    user.update(req_data)
     ser_user = user_schema.dump(user)
     return custom_response(ser_user[0], 200)
 
