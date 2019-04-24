@@ -19,6 +19,8 @@ class SkillsModel(db.Model):
 
     def __init__(self, data):
         # self.user_id = data.get('data.user.id') # Testing
+        print(type(data))
+        print(data)
         self.owner_id = data.get('owner_id')
         self.content = data.get('content')
 

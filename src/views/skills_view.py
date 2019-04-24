@@ -1,4 +1,4 @@
-from flask import request, json, Response, Blueprint, g
+from flask import request, json, Response, Blueprint
 from .. models.skills import SkillsModel, SkillsSchema
 from .. shared.authentication import Auth
 
