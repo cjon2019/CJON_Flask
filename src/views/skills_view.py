@@ -16,7 +16,7 @@ def custom_response(res, status_code):
 @skills_api.route('/', methods=['GET'])
 def skills_get_all():
     skills = SkillsModel.get_all_skills()
-    ser_data = skills_schema.dump(skills, many=True)
+    ser_data, error = skills_schema.dump(skills, many=True)
     print(type(ser_data))
     print(ser_data)
     return custom_response(ser_data, 200)
@@ -27,7 +27,7 @@ def skills_get_by_id(id):
     post = SkillsModel.get_one_skill(id)
     if not post:
         return custom_response({'error': 'Skill not found'}, 404)
-    data = skills_schema.dump(post)
+    data, error = skills_schema.dump(post)
     return custom_response(data, 200)
 
 # CREATE - Post new skill to db
@@ -37,13 +37,13 @@ def skills_create():
     req_data = request.get_json()
     print(f'req_data = {req_data}')
 
-    data = skills_schema.load(req_data)
+    data, error = skills_schema.load(req_data)
     print(f'data = {data}')
 
     skills = SkillsModel(data)
     skills.save()
 
-    ser_data = skills_schema.dump(skills)
+    ser_data, error = skills_schema.dump(skills)
     print(f'ser_data = {ser_data}')
     return custom_response(ser_data, 201)
 
@@ -56,15 +56,15 @@ def skills_update(id):
     if not skill:
         return custom_response({'error': 'Skill not found'}, 404)
 
-    data = skills_schema.dump(skill)
+    data, error = skills_schema.dump(skill)
 
     # if data.get('owner_id') != g.user.get('id'):
     #     return custom_response({'error': 'Permission Denied'}, 400)
 
-    data = skills_schema.load(req_data, partial=True)
+    data, error = skills_schema.load(req_data, partial=True)
 
     skill.update(data)
-    data = skills_schema.dump(skill)
+    data, error = skills_schema.dump(skill)
     return custom_response(data, 200)
 
 
@@ -76,7 +76,7 @@ def delete(id):
     if not post:
         return custom_response({'error': 'Skill not found'}, 404)
 
-    data = skills_schema.dump(post)
+    data, error = skills_schema.dump(post)
     # if data.get('owner_id') != g.user.get('id'):
     #     return custom_response({'error': 'Permission Denied'}, 400)
 

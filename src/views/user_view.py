@@ -17,7 +17,7 @@ def custom_response(res, status_code):
 # @Auth.auth_required
 def get_all():
     users = UserModel.get_all_users()
-    ser_users = user_schema.dump(users, many=True)
+    ser_users, error = user_schema.dump(users, many=True)
     print(ser_users)
     return custom_response(ser_users, 200)
 
@@ -25,7 +25,7 @@ def get_all():
 @user_api.route('/<int:id>', methods=['GET'])
 def get_one(id):
     user = UserModel.get_by_id(id)
-    ser_data = user_schema.dump(user)
+    ser_data, error = user_schema.dump(user)
     return custom_response(ser_data, 200)
 
 # CREATE new user
@@ -61,7 +61,7 @@ def update(id):
 
     user = UserModel.get_by_id(id)
     user.update(req_data)
-    ser_user = user_schema.dump(user)
+    ser_user, error = user_schema.dump(user)
     return custom_response(ser_user, 200)
 
 # DELETE user by Id
