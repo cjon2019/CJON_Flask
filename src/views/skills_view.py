@@ -16,10 +16,12 @@ def custom_response(res, status_code):
 @skills_api.route('/', methods=['GET'])
 def skills_get_all():
     skills = SkillsModel.get_all_skills()
-    data, error = skills_schema.dump(skills, many=True)
-    print(type(data))
-    print(data)
-    return custom_response(data, 200)
+    ser_data = skills_schema.dump(skills, many=True)
+    print(type(ser_data))
+    print(ser_data)
+    print(type(ser_data[0]))
+    print(ser_data[0])
+    return custom_response(ser_data[0], 200)
 
 # READ - Get 1 skill
 @skills_api.route('/<int:id>', methods=['GET'])
